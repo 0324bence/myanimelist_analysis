@@ -2,7 +2,7 @@
 
 [![lang](https://img.shields.io/badge/lang-hu-green.svg)](https://github.com/0324bence/myanimelist_analysis/blob/master/README.hu.md)
 
-[![nbviewer](https://img.shields.io/badge/Render_on-nbviewer-orange?logo=jupyter&logoColor=white)](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/main/main.ipynb) [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/) [![Status](https://img.shields.io/badge/Status-WIP-yellow.svg)]()
+[![nbviewer](https://img.shields.io/badge/Render_on-nbviewer-orange?logo=jupyter&logoColor=white)](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/master/main.ipynb) [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/) [![Status](https://img.shields.io/badge/Status-WIP-yellow.svg)]()
 
 ## Overview
 
@@ -19,7 +19,7 @@ This project explores the relationship between **critical consensus (`Score`)**,
 
 ## Viewing the Notebook
 
-If GitHub has trouble rendering the interactive charts or large outputs, view the full notebook directly via **[nbviewer](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/main/main.ipynb)**.
+If GitHub has trouble rendering the interactive charts or large outputs, view the full notebook directly via **[nbviewer](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/master/main.ipynb)**.
 
 ## Dataset
 

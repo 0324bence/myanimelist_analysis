@@ -2,7 +2,7 @@
 
 [![lang](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/0324bence/myanimelist_analysis/blob/master/README.md)
 
-[![nbviewer](https://img.shields.io/badge/Megnyitás-nbviewer-orange?logo=jupyter&logoColor=white)](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/main/main.ipynb) [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/) [![Status](https://img.shields.io/badge/Státusz-WIP-yellow.svg)]()
+[![nbviewer](https://img.shields.io/badge/Megnyitás-nbviewer-orange?logo=jupyter&logoColor=white)](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/master/main.ipynb) [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/) [![Status](https://img.shields.io/badge/Státusz-WIP-yellow.svg)]()
 
 ## Áttekintés
 
@@ -19,7 +19,7 @@ Ez a projekt a **kritikai konszenzus (`Score`)**, a **kultikus rajongótábor (`
 
 ## A Notebook megtekintése
 
-Ha a GitHub nem jelenítené meg megfelelően az interaktív diagramokat vagy a nagyobb kimeneteket, a teljes notebook közvetlenül megtekinthető az **[nbviewer](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/main/main.ipynb)** felületén.
+Ha a GitHub nem jelenítené meg megfelelően az interaktív diagramokat vagy a nagyobb kimeneteket, a teljes notebook közvetlenül megtekinthető az **[nbviewer](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/master/main.ipynb)** felületén.
 
 ## Adathalmaz
 
