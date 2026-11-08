@@ -1,0 +1,24 @@
+# MyAnimeList (MAL) Exploratory Data Analysis
+
+[![nbviewer](https://img.shields.io/badge/Render_on-nbviewer-orange?logo=jupyter&logoColor=white)](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/main/main.ipynb) [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/) [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)](https://jupyter.org/) [![Status](https://img.shields.io/badge/Status-WIP-yellow.svg)]()
+
+## Overview
+
+Does an anime's average rating tell the same story as its fan favorites count or overall viewership? 
+
+This project explores the relationship between **critical consensus (`Score`)**, **cult following (`Favorites`)**, and **mainstream popularity (`Members`)** across 17,500+ anime titles and 109 million user interactions from MyAnimeList.
+
+## Key Questions Explored
+
+- **Quality vs. Hype:** How closely do top-rated lists align with the most-watched and most-favorited anime?
+- **Outlier Detection:** Which titles stand out as overhyped blockbusters, niche critical masterpieces, or cult classics?
+- **Contextual Factors:** How does an anime's format (TV, Movie, OVA), release era, or episode count influence its reception and fan dedication?
+<!-- - **Viewer Behavior:** At what point do viewers typically drop a series, and do veteran watchers rate more harshly than newcomers? -->
+
+## Viewing the Notebook
+
+If GitHub has trouble rendering the interactive charts or large outputs, view the full notebook directly via **[nbviewer](https://nbviewer.org/github/0324bence/myanimelist_analysis/blob/main/main.ipynb)**.
+
+## Dataset
+
+The analysis is based on the [Anime Recommendation Database 2020](https://www.kaggle.com/datasets/hernan4444/anime-recommendation-database-2020) dataset (`anime.csv` and `animelist.csv`).
