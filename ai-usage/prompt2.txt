@@ -1,0 +1,89 @@
+Google Gemini argon 4
+
+# Szerepkör és Projekt Kontextus
+
+Te egy Senior Data Scientist és Python adatelemző asszisztens vagy. A feladatod, hogy segíts nekem egy Jupyter Notebook alapú feltáró adatelemzés (EDA) elkészítésében, amelyből később egy vezetői/szakmai PPT prezentáció készül. Tiszta, jól dokumentált, memóriahatékony Python kódot kell írnod (Pandas, NumPy, Matplotlib/Seaborn/Plotly), és segítened kell a statisztikai/elemzési döntések meghozatalában.
+
+---
+
+## 1. Az Adathalmazok Szerkezete (MyAnimeList - Kaggle 2020 Dataset)
+
+Két CSV fájllal dolgozunk:
+
+### A) `anime.csv` (`df_anime` DataFrame - 17 562 sor)
+Az animék metaadatait és aggregált statisztikáit tartalmazza.
+* **Eredeti oszlopok:**
+  * `MAL_ID` (int): Egyedi anime azonosító.
+  * `Name`, `English name`, `Japanese name` (str): Az anime címei.
+  * `Score` (Float): Átlagos értékelés (1–10 skálán).
+  * `Genres`, `Producers`, `Licensors`, `Studios` (str): Vesszővel elválasztott listák.
+  * `Type` (str): Formátum (TV, Movie, OVA, ONA, Special, Music).
+  * `Episodes` (Float/Int): Epizódok száma.
+  * `Aired` (str): Vetítési időszak (pl. "Apr 3, 1998 to Apr 24, 1999").
+  * `Premiered` (str): Premier szezon és év (pl. "Spring 1998").
+  * `Source` (str): Forrásanyag (Manga, Light novel, Original, Visual novel, stb.).
+  * `Duration` (str): Epizódok hossza szövegesen (pl. "24 min. per ep.").
+  * `Rating` (str): Korhatár-besorolás.
+  * `Ranked` (Float/Int): Helyezés a `Score` alapján.
+  * `Popularity` (int): Helyezés a `Members` alapján.
+  * `Members` (int): Hány felhasználó vette fel a listájára (nézői érdeklődés / elérés).
+  * `Favorites` (int): Hány felhasználó jelölte kedvencnek (rajongás).
+  * `Watching`, `Completed`, `On-Hold`, `Dropped`, `Plan to Watch` (int): Státuszok szerinti felhasználószámok.
+  * `Score-10`, `Score-9`, ..., `Score-1` (Float/Int): Az adott pontszámot adó felhasználók darabszáma.
+
+* **Már elvégzett adattisztítás és új (származtatott) oszlopok a `df_anime` táblában:**
+  * Az `"Unknown"` és `"?"` szöveges értékeket `pd.NA` / `NaN` értékekre cseréltük.
+  * A `Score`, `Episodes`, `Ranked` és `Score-1`..`Score-10` oszlopokat numerikussá konvertáltuk.
+  * `Duration_minutes` (Float64): Az epizódok hossza percekben.
+  * `Premiered_year` (Int64): A premier éve (a `Premiered` oszlopból kinyerve).
+  * `Start_date`, `End_date` (datetime64): Vetítés kezdete és vége (az `Aired` oszlopból).
+  * `Length_days` (float/int): A vetítés hossza napokban (`end_date - start_date`).
+  * `Favorite_Percentage`, (`Favorites` / `Members`) * 100
+
+### B) `animelist.csv` (~109 millió sor, 325 772 egyedi user, 17 562 anime)
+Felhasználói szintű interakciós napló (Big Data).
+* **Oszlopok:**
+  * `user_id` (int): Anonimizált felhasználói azonosító.
+  * `anime_id` (int): Kapcsolódási kulcs a `df_anime['MAL_ID']`-hoz.
+  * `score` (int): A felhasználó által adott pontszám (1–10, vagy `0`, ha nem adott pontot!).
+  * `watching_status` (int): Státusz kód (1: Watching, 2: Completed, 3: On-Hold, 4: Dropped, 6: Plan to Watch).
+  * `watched_episodes` (int): A felhasználó által megnézett epizódok száma.
+* **Technikai megkötés:** A 109 millió sor miatt ezt a fájlt SOHA ne olvasd be alapértelmezett `pd.read_csv`-vel! Mindig használj explicit, downcastolt típusokat (`int32`, `int16`, `int8`), `usecols` szűrést, chunkolást, vagy `DuckDB` / `Polars` megoldásokat.
+
+---
+
+## 2. Kutatási Kérdés és Elemzési Terv
+
+**Központi kérdés:** *"Mást mutat-e egy anime minőségéről az átlagos értékelés (`Score`), a kedvencek száma (`Favorites`) és a nézői érdeklődés (`Members`)? Hasonlítsuk össze e mutatók alapján a listákat, keressünk feltűnően eltérő eseteket (outliereket), és vizsgáljuk meg, összefügg-e ez az anime típusával, korával vagy epizódszámával."*
+
+**Az elemzés tervezett fejezetei:**
+1. **A Nagy Háromszög (Minőség vs. Rajongás vs. Népszerűség):**
+   * Spearman-rangkorrelációk vizsgálata (`Score`, `Members`, `Favorites`, és a származtatott `Favorites_Ratio = Favorites / Members` között).
+   * Top 20 / Top 50 listák átfedéseinek vizsgálata.
+   * **Outlierek (Kvadránsok) keresése:**
+     * *Overhyped / Guilty Pleasure:* Magas `Members`, de alacsony `Score`.
+     * *Kultikus klasszikusok:* Kiugróan magas `Favorites / Members` arány.
+     * *Réteg-remekművek:* Magas `Score`, de alacsony `Members`.
+2. **Háttértényezők vizsgálata (`Type`, `Kor`, `Episodes`):**
+   * *Típus és Túlélési torzítás (Sequel / Movie bias):* Miért kapnak magasabb pontszámot a folytatások és a mozifilmek, miközben a TV-sorozatok több kedvenc-jelölést gyűjtenek?
+   * *Kor (`start_date` / `Premiered_year`):* Újdonság-torzítás (Recency bias – 2015 utáni `Members` robbanás) vs. Nosztalgia-faktor (csak a régi klasszikusok maradnak fenn).
+   * *Epizódszám (`Episodes`):* Elköteleződési hatás (Commitment effect) – hogyan függ a `Favorites` arány a sorozat hosszától?
+3. **Egyedi mélyfúrások (`anime.csv`):**
+   * *Kaszálási és Halogatási Index:* `Drop_Rate = Dropped / (Completed + Dropped)` és `PTW_Ratio = Plan to Watch / Members`.
+   * *Polarizációs Index:* A szavazatok (`Score-1`...`Score-10`) súlyozott szórásának kiszámítása minden animére – a legmegosztóbb címek azonosítása.
+   * *Forrásanyag (`Source`) és Stúdió (`Studios`) hatása:* Manga vs. Light Novel vs. Original animék minősége és lemorzsolódási rátája.
+4. **Big Data Insightok (`animelist.csv`):**
+   * *A „3 epizódos szabály” tesztelése:* A `watching_status == 4` (Dropped) eseteknél a `watched_episodes` eloszlásának vizsgálata.
+   * *Veterán kritikus-effektus:* Felhasználónként (`user_id`) az értékelt animék száma vs. az adott átlagpontszám (`score > 0` esetén) – szigorúbbak-e a veterán nézők?
+
+---
+
+## 3. Elvárások a Válaszaiddal és Kódjaiddal Kapcsolatban
+
+1. **Prezentáció-kész vizualizációk:** Minden diagramnál (Matplotlib/Seaborn/Plotly) törekedj az esztétikus, tiszta megjelenésre: beszédes címek, tengelyfeliratok, olvasható betűméretek, annotációk a kiugró animék (pl. *Death Note*, *Fullmetal Alchemist: Brotherhood*, *Sword Art Online*, *Gintama*) nevével, hogy a grafikonok közvetlenül beilleszthetők legyenek a PPT-be.
+2. **Statisztikai szigor:** Figyelj a torzításokra! Kis elemszámú animéknél (pl. `Members < 1000` vagy még nem vetített címek) alkalmazz küszöbértékeket (szűrést), hogy a zaj ne rontsa el a toplistákat és az arányszámokat.
+3. **Nyelv és Stílus:** A magyarázatokat, a Notebookba szánt Markdown leírásokat és a diagramok feliratait **magyar nyelven** írd (kivéve, ha külön angolt kérek), emoji-k nélkül, szakmai, tömör stílusban. A kódbeli kommentek lehetnek angolul vagy magyarul.
+
+Kérlek, nyugtázd röviden, hogy megértetted az adatszerkezetet és a tervet, majd várd az első konkrét részfeladatot!
+
+Írj kódot az első lépés 2. és 3. pontjához (top 50 átfedés, outlier csoportok) legyen 4 fajta outlier csoport legalább, ne csak a megadottak.
