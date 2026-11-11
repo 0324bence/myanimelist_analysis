@@ -64,6 +64,7 @@ Felhasználói szintű interakciós napló (Big Data).
      * *Overhyped / Guilty Pleasure:* Magas `Members`, de alacsony `Score`.
      * *Kultikus klasszikusok:* Kiugróan magas `Favorites / Members` arány.
      * *Réteg-remekművek:* Magas `Score`, de alacsony `Members`.
+     * *Passzív Közönségsiker* Magas `Members` Alacsony `Favorites / Members` arány
 2. **Háttértényezők vizsgálata (`Type`, `Kor`, `Episodes`):**
    * *Típus és Túlélési torzítás (Sequel / Movie bias):* Miért kapnak magasabb pontszámot a folytatások és a mozifilmek, miközben a TV-sorozatok több kedvenc-jelölést gyűjtenek?
    * *Kor (`start_date` / `Premiered_year`):* Újdonság-torzítás (Recency bias – 2015 utáni `Members` robbanás) vs. Nosztalgia-faktor (csak a régi klasszikusok maradnak fenn).
