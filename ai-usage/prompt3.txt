@@ -94,3 +94,7 @@ A válasz alapján a következőkről adj kódot:
 - Kor: Kéttengelyes idősoros szalagdiagram
 - Epizódszám: Log-Log Scatter Plot és Boxplot
 Konkrét anime annotációk most nem kellenek. Csak code-block-ban válaszolj. A válaszodban add meg a kódot és a hozzá tartozó markdownt is. Mindkét fajta elemet code-blockban. Csak a code-blockokat írd le, más nem kell
+
+3. üzenet:
+
+A 2.3 megoldása nem tetszik. 4 értéket reprezentálni 1 ábrán nem célszerű, mert nehezen értelmezhető lesz. Más megoldás kell
